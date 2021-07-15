@@ -9,12 +9,11 @@
 #include <stdio.h> 
 #include <String> 
 
-
-#define API_KEY "e544484d503214178d65887b620d784c"  
-#define SSID  "Tien Thao 01" 
-#define PW "88889999" 
-#define city "Porto" 
-#define countryCode "PT" 
+//Open weather API key
+#define API_KEY ""  
+#define SSID  "" 
+#define PW "" 
+#define city_id "1580578" 
 double temp ; 
 double humid ; 
 // THE DEFAULT TIMER IS SET TO 10 SECONDS FOR TESTING PURPOSES
@@ -46,6 +45,7 @@ void setup() {
     //Setting up the lcd 
     taskManager.scheduleFixedRate(250, [] {
     // (note: line 1 is the second row, since counting begins with 0):
+         
         lcd.noBlink();
         lcd.setCursor(0,0) ;
         lcd.print(F("Temp:")); 
@@ -91,7 +91,7 @@ void loop() {
   if ((millis() - lastTime) > timerDelay) {
     // Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED){
-      String  serverPath = "http://api.openweathermap.org/data/2.5/weather?q=" city  ","  countryCode "&APPID=" API_KEY;
+      String  serverPath = "http://api.openweathermap.org/data/2.5/weather?id=" city_id "&units=imperial&APPID=" API_KEY;
       
       jsonBuffer = httpGETRequest(serverPath.c_str());
       Serial.println(jsonBuffer);
